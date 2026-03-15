@@ -4,6 +4,8 @@ Your OpenClaw agent can now check your Alibaba Cloud Bailian Coding Plan quota �
 
 No more manual dashboard logins. Just ask, and it tells you exactly where you stand.
 
+---
+
 ## What You Get
 
 - Subscription status and days remaining
@@ -19,16 +21,16 @@ This skill automates the boring part. You ask, it checks, you move on.
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/bailian-usage-skill.git
+git clone https://github.com/jackwude/bailian-usage-skill.git
 cp -r bailian-usage-skill/bailian-usage ~/.openclaw/workspace/skills/
 ```
 
 Then add your credentials to `~/.openclaw/workspace/TOOLS.md`:
 
 ```markdown
-## 🔐 阿里云百炼账号
-- **账号**: your-email@example.com
-- **密码**: your-password
+## 🔐 Alibaba Cloud Bailian Account
+- **Email**: your-email@example.com
+- **Password**: your-password
 ```
 
 ## Usage
