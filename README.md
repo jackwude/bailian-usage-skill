@@ -1,87 +1,87 @@
 # bailian-usage Skill
 
-Your OpenClaw agent can now check your Alibaba Cloud Bailian Coding Plan quota — automatically.
+让你的 OpenClaw 助手自动查询阿里云百炼 Coding Plan 的剩余额度。
 
-No more manual dashboard logins. Just ask, and it tells you exactly where you stand.
+再也不用手动登录控制台查用量了。问一句，它直接告诉你结果。
 
 ---
 
-## What You Get
+## 你能得到什么
 
-- Subscription status and days remaining
-- Usage breakdown: last 5 hours, 1 week, 1 month
-- Which models your plan includes
+- 套餐状态和剩余天数
+- 用量明细：近 5 小时、近一周、近一月
+- 套餐包含的可用模型列表
 
-## Why I Built This
+## 为什么做这个
 
-I got tired of logging into the Bailian console every time I wanted to check my quota. The data's right there on the page — why should I have to click through a dashboard to see it?
+我受够了每次想看剩余额度都要登录百炼控制台。数据明明就在页面上，为什么非得点进 dashboard 才能看到？
 
-This skill automates the boring part. You ask, it checks, you move on.
+这个技能把麻烦的部分自动化。你问，它查，你继续干活。
 
-## Installation
+## 安装
 
 ```bash
 git clone https://github.com/jackwude/bailian-usage-skill.git
 cp -r bailian-usage-skill/bailian-usage ~/.openclaw/workspace/skills/
 ```
 
-Then add your credentials to `~/.openclaw/workspace/TOOLS.md`:
+然后在 `~/.openclaw/workspace/TOOLS.md` 里添加你的账号：
 
 ```markdown
-## 🔐 Alibaba Cloud Bailian Account
-- **Email**: your-email@example.com
-- **Password**: your-password
+## 🔐 阿里云百炼账号
+- **账号**: your-email@example.com
+- **密码**: your-password
 ```
 
-## Usage
+## 使用方法
 
-Ask your agent any of these:
+发以下任意命令给你的助手：
 
 - "查百炼额度"
 - "百炼用量"
 - "看看阿里云还剩多少额度"
 - "Check my Bailian quota"
 
-It'll respond with something like:
+它会返回类似这样的结果：
 
 ```
-## 📊 Bailian Coding Plan Details
+## 📊 百炼 Coding Plan 套餐详情
 
-**Status:** ✅ Active | **18 days remaining** (expires 2026-04-03)
-**Auto-renewal:** ❌ Disabled
+**套餐状态：** ✅ 生效中 | 剩余 **18 天**（2026-04-03 到期）
+**自动续费：** ❌ 未开启
 
-**Usage:**
-- Last 5 hours: 48%
-- Last 1 week: 42%
-- Last 1 month: 39%
+**用量消耗：**
+- 近 5 小时：48%
+- 近一周：42%
+- 近一月：39%
 
-**Verdict:** ✅ Plenty of quota left
+**用量分析：** ✅ 用量充足
 ```
 
-## Under the Hood
+## 技术实现
 
-This skill uses OpenClaw's built-in `browser` tool — not Playwright, not Selenium, nothing external.
+这个技能用的是 OpenClaw 内置的 `browser` 工具 —— 不是 Playwright，不是 Selenium，没有任何外部依赖。
 
-**Why?** Because I tried Playwright first. It kept choking on the login iframe (cross-origin restrictions). The browser tool evaluates JavaScript directly in the page context, so none of that applies.
+**为什么？** 因为我一开始试的是 Playwright。它一直被登录弹窗的 iframe 卡住（跨域限制）。browser tool 直接在页面上下文里执行 JavaScript，没这个问题。
 
-Translation: it just works.
+说白了：能用，不折腾。
 
-## What Could Go Wrong
+## 可能遇到的问题
 
-- **CAPTCHA / SMS verification:** If Alibaba's fraud detection kicks in, you'll need to complete it manually once. After that, you're good.
-- **Browser required:** This runs in a real browser, so you need a graphical environment (macOS, Linux with X11, or Windows).
-- **Data lag:** The usage numbers come from Bailian's backend. They might be a few minutes behind — not a bug, just how their system works.
+- **滑块 / 短信验证：** 如果阿里风控触发了，你需要手动完成一次验证。之后就正常了。
+- **需要浏览器环境：** 这个技能在真实浏览器里跑，所以需要图形界面（macOS、Linux with X11、Windows）。
+- **数据延迟：** 用量数据来自百炼后端，可能有几分钟延迟 —— 不是 bug，人家系统就这样。
 
-## Security
+## 安全性
 
-Your credentials stay in `TOOLS.md` on your machine. They're never sent anywhere except directly to Alibaba's login page (which is... kind of the point).
+你的账号密码存在本地的 `TOOLS.md` 里，不会发给任何地方 —— 除了阿里云的登录页面（不然怎么登录呢）。
 
-No cookies are saved. Every query does a fresh login — simpler, and one less thing to debug when it breaks.
+不保存 cookies。每次查询都是全新登录 —— 更简单，而且少一个可能出问题的环节。
 
-## License
+## 许可证
 
-MIT. Use it, break it, fix it, whatever.
+MIT 协议。随便用，随便改，随便折腾。
 
 ---
 
-**Found a bug?** Open an issue. **Made it better?** Send a PR. I'm not precious about this thing.
+**发现 bug？** 提个 issue。**改得更好了？** 发个 PR。我对这东西没啥执念，好用就行。
